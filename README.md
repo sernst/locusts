@@ -6,13 +6,19 @@ load testing swarms using Python 3.6. The locusts image functions can function
 as either a master or slave depending on whether or not the _--master-host_ 
 flag is specified in a container's run execution call.
 
+The docker image is available in 
+[Docker Hub](https://hub.docker.com/r/swernst/locusts/). You can pull the 
+image with the command:
+
+    $ docker pull swernst/locusts:latest
+
 ## Master & Slave
 
 The optional _--master-host_ argument is used to specify that the container 
 should be a slave and communicate with the master with the specified host.
 For example:
 
-    docker run -it --rm \
+    $ docker run -it --rm \
         -v ./scripts:/scripts \
         swernst/locusts \
         --master-host=127.0.0.1

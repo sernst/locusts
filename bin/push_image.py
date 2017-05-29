@@ -10,9 +10,9 @@ if not commit_message:
 
 commit_cmd = [
     'docker', 'commit',
-    '-m', '"{}"'.format,
+    '-m', '"{}"'.format(commit_message),
     '-a', '"Scott Ernst"',
-    'locusts', 'swernst/locusts:latest'
+    'swernst/locusts', 'swernst/locusts:latest'
 ]
 
 print('COMMITTING IMAGE')

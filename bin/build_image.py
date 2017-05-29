@@ -10,7 +10,7 @@ directory = os.path.realpath(os.path.join(
 cmd = [
     'docker',
     'build',
-    '-t', 'locusts',
+    '-t', 'swernst/locusts',
     '"{}"'.format(directory)
 ]
 
