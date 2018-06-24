@@ -11,7 +11,7 @@ cmd = [
     '-it', '--rm',
     '-v', '{}:/scripts'.format(scripts_directory),
     '-p', '8089:8089',
-    'locusts'
+    'swernst/locusts'
 ]
 
 os.system(' '.join(cmd + sys.argv[1:]))
