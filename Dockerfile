@@ -1,4 +1,4 @@
-FROM ubuntu:16.10
+FROM ubuntu:18.04
 
 LABEL maintainer swernst@gmail.com
 
@@ -10,7 +10,7 @@ RUN apt-get -y install \
         python3.6 \
         python3-pip && \
     python3.6 -m pip install \
-        locustio==0.8a2
+        locustio==0.8
 
 COPY ./run.py /run.py
 
