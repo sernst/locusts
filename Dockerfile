@@ -10,7 +10,7 @@ RUN apt-get -y install \
         python3.6 \
         python3-pip && \
     python3.6 -m pip install \
-        locustio==0.8
+        locustio==0.9
 
 COPY ./run.py /run.py
 
