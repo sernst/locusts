@@ -1,25 +1,24 @@
 #! /usr/bin/env python3
-
+import argparse
 import os
 import sys
 
-commit_message = ' '.join(sys.argv[1:])
-if not commit_message:
-    print('No Commit message specified')
-    sys.exit(1)
 
-commit_cmd = [
-    'docker', 'commit',
-    '-m', '"{}"'.format(commit_message),
-    '-a', '"Scott Ernst"',
-    'swernst/locusts', 'swernst/locusts:latest'
-]
+def parse() -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('locust_io_version')
+    return parser.parse_args()
 
-print('COMMITTING IMAGE')
-os.system(' '.join(commit_cmd))
 
-cmd = ['docker', 'push', 'swernst/locusts:latest']
+def main(args: argparse.Namespace):
+    print('PUSHING IMAGES')
+    cmd = ['docker', 'push', 'swernst/locusts:latest']
+    os.system(' '.join(cmd))
 
-print('PUSHING IMAGE')
-os.system(' '.join(cmd))
-print('IMAGE PUSHED')
+    cmd = ['docker', 'push', f'swernst/locusts:{args.locust_io_version}']
+    os.system(' '.join(cmd))
+    print('IMAGES PUSHED')
+
+
+if __name__ == '__main__':
+    main(parse())

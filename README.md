@@ -34,7 +34,10 @@ would specify a worker container where the master resides at the local
 
 A locusts container requires that a volume be mounted to the container's 
 `/scripts` directory. It expects to find the *locustfile.py* to run in that 
-directory.
+directory as well as a *locust.config.json* file.
+
+Alternatively, this image can be used as a base image and the files copied
+into the scripts directory of the built container image.
 
 ## Docker Compose
 
