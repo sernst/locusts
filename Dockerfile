@@ -1,21 +1,27 @@
-FROM ubuntu:18.04
+ARG PYTHON_VERSION=3.9
 
-LABEL maintainer swernst@gmail.com
+FROM python:${PYTHON_VERSION}
 
-RUN apt-get -y update
+LABEL maintainer=swernst@gmail.com
 
-RUN apt-get -y install \
-      libevent-dev \
-      python3.6-dev \
-      python3.6 \
-      python3-pip \
- && python3.6 -m pip install \
-      locustio==0.11.0
+WORKDIR /support
 
-COPY ./run.py /run.py
+COPY pyproject.toml .
+COPY README.md .
+
+RUN pip install poetry \
+ && poetry config virtualenvs.create false \
+ && poetry install --no-root
+
+COPY locusts /support/locusts
+
+RUN poetry config virtualenvs.create false \
+ && poetry install
+
+WORKDIR /scripts
 
 EXPOSE 8089
 EXPOSE 5557
 EXPOSE 5558
 
-ENTRYPOINT ["python3.6", "-u", "/run.py"]
+ENTRYPOINT ["locusts", "run"]

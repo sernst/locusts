@@ -1,15 +1,15 @@
 version: "3"
 services:
 
-  locust-master:
+  main:
     build: .
     volumes:
       - ./scripts:/scripts
     ports:
       - "8089:8089"
 
-  locust-worker:
+  worker:
     build: .
-    command: "--master-host=locust-master"
+    command: "--main-host=main"
     volumes:
       - ./scripts:/scripts

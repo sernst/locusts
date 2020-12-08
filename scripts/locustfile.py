@@ -1,14 +1,11 @@
-from locust import Locust
-from locust import TaskSet
-from locust import task
+import locust
 
 
-class MyTaskSet(TaskSet):
-
-    @task
+class MyTaskSet(locust.TaskSet):
+    @locust.task
     def my_task(self):
-        print('Locust instance (%r) executing "my_task"'.format(self.locust))
+        print('Locust instance ({}) executing "my_task"'.format(self.user))
 
 
-class MyLocust(Locust):
-    task_set = MyTaskSet
+class MyUser(locust.User):
+    tasks = [MyTaskSet]

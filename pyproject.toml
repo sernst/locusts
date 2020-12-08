@@ -1,0 +1,51 @@
+[tool.poetry]
+name = "locusts"
+version = "0.1.0"
+description = "Container-based locusts.io"
+authors = ["Scott Ernst <swernst@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/sernst/locusts"
+repository = "https://github.com/sernst/locusts"
+documentation = "https://github.com/sernst/locusts"
+keywords = ["load-testing", "testing", "locust.io"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Topic :: Software Development :: Testing",
+  "Topic :: Utilities",
+]
+
+[tool.poetry.scripts]
+locusts = "locusts:main"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+locust = "^1.4.1"
+toml = "^0.10.2"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.1.2"
+coverage = "^5.3"
+black = { version = "*", allow-prereleases = true }
+pytest-cov = "^2.10.1"
+flake8 = "^3.8.4"
+flake8-black = "^0.2.1"
+mypy = "^0.790"
+taskipy = "^1.4.0"
+
+[tool.taskipy.tasks]
+# https://github.com/illBeRoy/taskipy
+black = "black ."
+mypy = "poetry run mypy ./locusts/ --ignore-missing-imports"
+flake8 = "flake8 ."
+test = "pytest . --cov-report=term-missing --cov=."
+lint = "task black && task flake8 && task mypy"
+check = "task black && task flake8 && task mypy && task test"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

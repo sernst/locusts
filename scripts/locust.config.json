@@ -1,4 +1,4 @@
 {
   "target": "https://api.example.com",
-  "locusts": ["MyLocust"]
+  "users": ["MyUser"]
 }
